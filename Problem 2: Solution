@@ -1,13 +1,14 @@
 #CHANGE THE CODE LITTLE BEFORE SUBMITTING to AVOID CONTEST VIOLATION
 class Solution:
     def isStrictlyPalindromic(self, n: int) -> bool:
-        for temp_base in range(2, n-2+1):
+        for base in range(2, n-2+1):
             test_temp = ''
-            temp_val1 = n
-            while temp_val1:
-                test_temp += str(temp_val % temp_base)
-                temp_val1 = temp_val // temp_base
+            test_temp_val = n
+            while test_temp_val:
+                test_temp_val += str(test_temp_val % base)
+                test_temp_val = test_temp_val // base
             if test_temp != test_temp[::-1]:
                 return False
         return True
+        
         
