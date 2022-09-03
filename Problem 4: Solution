@@ -1,1 +1,37 @@
-
+class Solution:
+    def maximumRobots(self, chargeTimes: List[int], runningCosts: List[int], budget: int) -> int:
+        n = len(chargeTimes)
+        def check(m):
+            if m == 0:
+                return True
+            s = deque()
+            vsum = 0
+            for i in range(m):
+                while s and s[-1][0] <= chargeTimes[i]:
+                    s.pop()
+                s.append([chargeTimes[i], i])
+                vsum += runningCosts[i]
+            now = s[0][0] + vsum * m
+            if now <= budget:
+                return True
+            for i in range(n - m):
+                vsum += runningCosts[i+m] - runningCosts[i]
+                while s and s[-1][0] <= chargeTimes[i+m]:
+                    s.pop()
+                s.append([chargeTimes[i+m], i+m])
+                while s and s[0][1] <= i:
+                    s.popleft()
+                now = s[0][0] + vsum * m
+                if now <= budget:
+                    return True
+            return False
+        
+        l, r = 0, n + 1
+        while l < r:
+            mid = (l + r) // 2
+            if check(mid):
+                l = mid + 1
+            else:
+                r = mid
+        return l - 1
+                
