@@ -1,1 +1,12 @@
-
+#CHANGE THE CODE LITTLE BEFORE SUBMITTING to AVOID CONTEST VIOLATION
+class Solution:
+    def findSubarrays(self, nums: List[int]) -> bool:
+        temp_vals = set()
+        for i in range(len(nums) - 1):
+            temp_val1 = nums[i] + nums[i+1]
+            if temp_val1 in temp_vals:
+                return True
+            temp_vals.add(temp_val)
+        return False
+            
+        
